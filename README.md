@@ -82,7 +82,11 @@ $ npm install express
   rl.on('line', (line) => {});
   ```
 
-11. [14:09] Not getting response from api, probably synchronisation issue (ie. async-await) from the fs api.
+11. [14:09] Not getting response from api, probably synchronisation issue (ie. async-await) from the fs api.<br>
+  Searching web:<br>
+  "express read file on(close)"<br>
+
+12. [14:21] Solved the express vs fs syncing issue using Promise()
 
 ==== To-Do:
   1. Optimize large file reading. Possibly index line numbers for certain starting characters, like:<br>
