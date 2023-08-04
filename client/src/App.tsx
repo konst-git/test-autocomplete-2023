@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Route} from 'react-router-dom';
+import TextInput from './component/TextInput'
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <TextInput value="_testing_" />
     </div>
   );
 }

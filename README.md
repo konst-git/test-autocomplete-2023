@@ -34,3 +34,5 @@ $ npm install express
 ```
 
 6. [12:38] backend node express is working
+
+7. [12:38] design the basic page, to have a text input
