@@ -39,13 +39,13 @@ $ npm install express
 
 8. [12:46] start listening on the user strokes inside the text input
 
-8. [12:51] start making api calls to the words api to show the suggestions.<br>
+9. [12:51] start making api calls to the words api to show the suggestions.<br>
   Searching the web:<br>
   "react fetch api calls"
   Found:
   https://www.codingthesmartway.com/how-to-fetch-api-data-with-react/
 
-9. [13:11] Fetching basics is ready, but having a CORS issue between localhost:3000 and localhost:4000<br>
+10. [13:11] Fetching basics is ready, but having a CORS issue between localhost:3000 and localhost:4000<br>
    Searching web:<br>
    "express allow all CORS"
 
@@ -64,11 +64,11 @@ $ npm install express
 
    This has worked.
 
-9. [13:17] Try reading user textbox input and supply it as arguments to the api fetching call.
+11. [13:17] Try reading user textbox input and supply it as arguments to the api fetching call.
 
-10. [13:16] Fetching of suggestions according to user input basics work.
+12. [13:16] Fetching of suggestions according to user input basics work.
 
-11. [13:39] On the backend, start filtering the suggestions according to user input.<br>
+13. [13:39] On the backend, start filtering the suggestions according to user input.<br>
   The file is big, consider possible optimizations on reading from it.<br>
   For example, if possible to read only the lines having the prefix provided by user?<br>
   Searching the web:<br>
@@ -82,23 +82,23 @@ $ npm install express
   rl.on('line', (line) => {});
   ```
 
-11. [14:09] Not getting response from api, probably synchronisation issue (ie. async-await) from the fs api.<br>
+14. [14:09] Not getting response from api, probably synchronisation issue (ie. async-await) from the fs api.<br>
   Searching on web:<br>
   "express read file on(close)"<br>
 
-12. [14:21] Solved the express vs fs syncing issue using Promise()
+15. [14:21] Solved the express vs fs syncing issue using Promise()
 
-13. [14:21] Require the min input length to look for suggestions to be 2, to avoid overly many suggestions.
+16. [14:21] Require the min input length to look for suggestions to be 2, to avoid overly many suggestions.
 
-14. [14:21] Thinking to halt the outstanding fetching api call request, in case the new request is needed.
+17. [14:21] Thinking to halt the outstanding fetching api call request, in case the new request is needed.
   Searching on web:<br>
   "react abort existing fetch request"
 
-15. [14:24] Added the AbortController to resolve multiple fetching attempts.
+18. [14:24] Added the AbortController to resolve multiple fetching attempts.
 
-16. [14:45] Thinking to let user choose froom provided selections, by making the suggestions clickable.
+19. [14:45] Thinking to let user choose froom provided selections, by making the suggestions clickable.
 
-15. [15:03] Implemented clicking on one of the suggestion, and populating the input via useRef()
+20. [15:03] Implemented clicking on one of the suggestion, and populating the input via useRef()
 
 ==== To-Do:
   1. Optimize large file reading. Possibly index line numbers for certain starting characters, like:<br>
