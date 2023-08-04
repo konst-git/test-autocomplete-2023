@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef, MutableRefObject } from "react"
 import SuggestionsDisplay from './SuggestionsDisplay';
 
 type Prop = {
@@ -10,6 +10,8 @@ const TextInput = (props: Prop) => {
   const [suggestions, setSuggestions] = useState([]);
   const [fetchingError, setFetchingError] = useState("");
   const [fetchAbortController, setFetchAbortController] = useState(new AbortController());
+
+  const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal(event.target.value);
@@ -51,12 +53,13 @@ const TextInput = (props: Prop) => {
   return (
     <div>
       <input
+        ref={inputRef}
         type="text"
         placeholder="Start typing..."
         onChange={event => onChange(event)}
       />
       
-      <SuggestionsDisplay items={suggestions} />
+      <SuggestionsDisplay items={suggestions} inputRef={inputRef} />
 
       {fetchingError && (<div className="errorStyle">fetchingError</div>)}
     </div>

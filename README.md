@@ -98,6 +98,8 @@ $ npm install express
 
 16. [14:45] Thinking to let user choose froom provided selections, by making the suggestions clickable.
 
+15. [15:03] Implemented clicking on one of the suggestion, and populating the input via useRef()
+
 ==== To-Do:
   1. Optimize large file reading. Possibly index line numbers for certain starting characters, like:<br>
   lines 0    - 1050: starting with 'a'<br>
