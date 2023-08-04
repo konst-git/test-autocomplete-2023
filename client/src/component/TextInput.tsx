@@ -9,6 +9,7 @@ const TextInput = (props: Prop) => {
   const [inputVal, setInputVal] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [fetchingError, setFetchingError] = useState("");
+  const [fetchAbortController, setFetchAbortController] = useState(new AbortController());
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal(event.target.value);
@@ -21,8 +22,17 @@ const TextInput = (props: Prop) => {
   }, [ inputVal ]);
   
   const fetchSuggestions = (inputVal: string) => {
-    const apiUri = "/apiWords" + "?input=" + encodeURI(inputVal);
-    fetch("//localhost:4000" + apiUri)
+    fetchAbortController.abort();
+    const newAbortController = new AbortController();
+
+    setFetchAbortController(newAbortController);
+
+    const { signal } = newAbortController;
+
+    const apiUri = "/apiWords?input=" + encodeURI(inputVal);
+    fetch("//localhost:4000" + apiUri,
+      { signal }
+    )
       .then(response => {
         return response.json();
       })

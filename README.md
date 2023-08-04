@@ -83,12 +83,20 @@ $ npm install express
   ```
 
 11. [14:09] Not getting response from api, probably synchronisation issue (ie. async-await) from the fs api.<br>
-  Searching web:<br>
+  Searching on web:<br>
   "express read file on(close)"<br>
 
 12. [14:21] Solved the express vs fs syncing issue using Promise()
 
 13. [14:21] Require the min input length to look for suggestions to be 2, to avoid overly many suggestions.
+
+14. [14:21] Thinking to halt the outstanding fetching api call request, in case the new request is needed.
+  Searching on web:<br>
+  "react abort existing fetch request"
+
+15. [14:24] Added the AbortController to resolve multiple fetching attempts.
+
+16. [14:45] Thinking to let user choose froom provided selections, by making the suggestions clickable.
 
 ==== To-Do:
   1. Optimize large file reading. Possibly index line numbers for certain starting characters, like:<br>
