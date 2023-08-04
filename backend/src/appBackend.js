@@ -18,7 +18,12 @@ app.listen(PORT, () => {
 app.get("/apiWords", async (request, response) => {
   const input = request.query.input;
 
-  const res = await readSuggestionsFromFile(input);
-  
+  let res = null;
+  if (input && input.length >= 2) {
+    res = await readSuggestionsFromFile(input);
+  } else {
+    res = [];
+  }
+
   response.send(res);
 });

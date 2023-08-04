@@ -2,7 +2,6 @@ const fs = require('fs');
 const readline = require('readline');
 
 async function readSuggestions(prefix) {
-
   const customPromise = new Promise((resolve, reject) => {
     const fileStream = fs.createReadStream('./priv/asset/wordlist.txt');
 
@@ -14,7 +13,7 @@ async function readSuggestions(prefix) {
     const res = [];
     
     rl.on('line', (line) => {
-      if (line.startsWith(prefix)) {
+      if (line.toLowerCase().startsWith(prefix.toLowerCase())) {
         res.push(line);
       }
     });

@@ -88,6 +88,8 @@ $ npm install express
 
 12. [14:21] Solved the express vs fs syncing issue using Promise()
 
+13. [14:21] Require the min input length to look for suggestions to be 2, to avoid overly many suggestions.
+
 ==== To-Do:
   1. Optimize large file reading. Possibly index line numbers for certain starting characters, like:<br>
   lines 0    - 1050: starting with 'a'<br>

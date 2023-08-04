@@ -8,16 +8,19 @@ type Prop = {
 const TextInput = (props: Prop) => {
   const [inputVal, setInputVal] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [fetchingError, setFetchingError] = useState("");
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal(event.target.value);
   };
 
   useEffect(() => {
-    fetchUserData(inputVal)
+    if (inputVal.length >= 2) {
+      fetchSuggestions(inputVal)
+    }
   }, [ inputVal ]);
   
-  const fetchUserData = (inputVal: string) => {
+  const fetchSuggestions = (inputVal: string) => {
     const apiUri = "/apiWords" + "?input=" + encodeURI(inputVal);
     fetch("//localhost:4000" + apiUri)
       .then(response => {
@@ -25,7 +28,11 @@ const TextInput = (props: Prop) => {
       })
       .then(data => {
         setSuggestions(data);
-      })
+      },
+      err => {
+        setFetchingError(err);
+        console.log('[fetchSuggestions] error:', err);
+    })
   };
 
   /*
@@ -38,7 +45,10 @@ const TextInput = (props: Prop) => {
         placeholder="Start typing..."
         onChange={event => onChange(event)}
       />
+      
       <SuggestionsDisplay items={suggestions} />
+
+      {fetchingError && (<div className="errorStyle">fetchingError</div>)}
     </div>
   );
 };
