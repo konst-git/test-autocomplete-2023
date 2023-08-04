@@ -10,9 +10,10 @@ app.listen(PORT, () => {
 });
 
 app.get("/apiWords", (request, response) => {
-  const status = {
-    "Status": "Running"
-  };
+  const status = [
+    "dummy 1",
+    "dummy 2"
+  ];
   
   response.send(status);
 });

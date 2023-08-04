@@ -1,22 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react"
+import SuggestionsDisplay from './SuggestionsDisplay';
 
 type Prop = {
   value: string
 };
 
-const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  console.log('onChange: ' + event.target.value);
-};
-
 const TextInput = (props: Prop) => {
+  const [suggestions, setSuggestions] = useState([]);
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('onChange: ' + event.target.value);
+  };
+
+  useEffect(() => {
+    fetchUserData()
+  }, []);
+  
+  const fetchUserData = () => {
+    fetch("//localhost:4000/apiWords")
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setSuggestions(data)
+      })
+  };
+
+  /*
+    value={props.value}
+  */
   return (
     <div>
       <input
         type="text"
-        value={props.value}
+        placeholder="Start typing..."
         onChange={event => onChange(event)}
       />
-      <p>// place for errors</p>
+      <SuggestionsDisplay items={suggestions} />
     </div>
   );
 };

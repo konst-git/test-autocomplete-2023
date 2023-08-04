@@ -33,6 +33,16 @@ $ cd backend
 $ npm install express
 ```
 
-6. [12:38] backend node express is working
+6. [12:38] backend node express is working: http://localhost:4000/apiWords. But it returns nothing for now.
 
-7. [12:38] design the basic page, to have a text input
+7. [12:38] design a basic page, to have a text input
+
+8. [12:46] start listening on the user strokes inside the text input
+
+8. [12:51] start making api calls to the words api to show the suggestions.<br>
+  Searching the web:<br>
+  "react fetch api calls"
+
+9. [13:11] Fetching basics is ready, but having a CORS issue between localhost:3000 and localhost:4000<br>
+   Searching web:<br>
+   "express allow all CORS"
