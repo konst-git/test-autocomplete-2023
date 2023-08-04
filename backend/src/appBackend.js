@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require('cors');
+const readSuggestionsFromFile = require('./readSuggestionsFromFile');
 
 const app = express ();
 app.use(express.json());
@@ -14,16 +15,10 @@ app.listen(PORT, () => {
   console.log("Server Listening on PORT:", PORT);
 });
 
-app.get("/apiWords", (request, response) => {
+app.get("/apiWords", async (request, response) => {
   const input = request.query.input;
 
-  const res = [];
-
-  if (input) {
-    res.push("dummy 1");
-    res.push("dummy 2");
-    res.push(input);
-  }
+  const res = await readSuggestionsFromFile(input);
   
   response.send(res);
 });

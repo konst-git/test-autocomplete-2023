@@ -66,4 +66,28 @@ $ npm install express
 
 9. [13:17] Try reading user textbox input and supply it as arguments to the api fetching call.
 
-10. [13:16] Fetching of suggestions according to user input basics work. 
+10. [13:16] Fetching of suggestions according to user input basics work.
+
+11. [13:39] On the backend, start filtering the suggestions according to user input.<br>
+  The file is big, consider possible optimizations on reading from it.<br>
+  For example, if possible to read only the lines having the prefix provided by user?<br>
+  Searching the web:<br>
+  "nodejs read text file starting from line"<br>
+  "nodejs file read particular line"<br>
+
+  Will deal with this later. For now just basic file reading:
+  ```
+  const fileStream = fs.createReadStream('./priv/asset/wordlist.txt');
+  const rl = readline.createInterface()
+  rl.on('line', (line) => {});
+  ```
+
+11. [14:09] Not getting response from api, probably synchronisation issue (ie. async-await) from the fs api.
+
+==== To-Do:
+  1. Optimize large file reading. Possibly index line numbers for certain starting characters, like:<br>
+  lines 0    - 1050: starting with 'a'<br>
+  lines 1051 - 3000: starting with 'b'<br>
+  lines 3001 - 5000: starting with 'c',<br>
+  etc<br>
+  , so when the new user request input comes in, can use their input to find the related chunk in the file.
