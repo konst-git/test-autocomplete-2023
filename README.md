@@ -8,7 +8,7 @@ $ npm start
 $ cd /backend<br>
 $ npm run start:dev
 
-1. [11:24] Want to try creating the app within the Reac framework.<br>
+1. [11:24] Want to try creating the app within the React framework (mainly just want to dip the toes into Typescript).<br>
    Searching the web<br>
    https://create-react-app.dev/docs/getting-started <br>
 
