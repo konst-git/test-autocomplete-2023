@@ -42,7 +42,28 @@ $ npm install express
 8. [12:51] start making api calls to the words api to show the suggestions.<br>
   Searching the web:<br>
   "react fetch api calls"
+  Found:
+  https://www.codingthesmartway.com/how-to-fetch-api-data-with-react/
 
 9. [13:11] Fetching basics is ready, but having a CORS issue between localhost:3000 and localhost:4000<br>
    Searching web:<br>
    "express allow all CORS"
+
+   Found:<br>
+   https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/
+
+   Doing:
+   ```
+   $ npm install cors
+   ```
+
+   Adding to appBackend.js:
+   app.use(cors({
+     origin: 'http://localhost:3000'
+   }));
+
+   This has worked.
+
+9. [13:17] Try reading user textbox input and supply it as arguments to the api fetching call.
+
+10. [13:16] Fetching of suggestions according to user input basics work. 

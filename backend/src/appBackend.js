@@ -1,7 +1,12 @@
 const express = require("express");
+const cors = require('cors');
 
 const app = express ();
 app.use(express.json());
+
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 
 const PORT = process.env.PORT || 4000;
 
@@ -10,10 +15,15 @@ app.listen(PORT, () => {
 });
 
 app.get("/apiWords", (request, response) => {
-  const status = [
-    "dummy 1",
-    "dummy 2"
-  ];
+  const input = request.query.input;
+
+  const res = [];
+
+  if (input) {
+    res.push("dummy 1");
+    res.push("dummy 2");
+    res.push(input);
+  }
   
-  response.send(status);
+  response.send(res);
 });

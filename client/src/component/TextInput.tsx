@@ -6,23 +6,25 @@ type Prop = {
 };
 
 const TextInput = (props: Prop) => {
+  const [inputVal, setInputVal] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('onChange: ' + event.target.value);
+    setInputVal(event.target.value);
   };
 
   useEffect(() => {
-    fetchUserData()
-  }, []);
+    fetchUserData(inputVal)
+  }, [ inputVal ]);
   
-  const fetchUserData = () => {
-    fetch("//localhost:4000/apiWords")
+  const fetchUserData = (inputVal: string) => {
+    const apiUri = "/apiWords" + "?input=" + encodeURI(inputVal);
+    fetch("//localhost:4000" + apiUri)
       .then(response => {
-        return response.json()
+        return response.json();
       })
       .then(data => {
-        setSuggestions(data)
+        setSuggestions(data);
       })
   };
 
