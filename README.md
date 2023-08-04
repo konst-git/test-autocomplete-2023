@@ -32,3 +32,5 @@ Test autocomplete app
 $ cd backend
 $ npm install express
 ```
+
+6. [12:38] backend node express is working
