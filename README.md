@@ -1,5 +1,7 @@
 Test autocomplete app
 
+Consits of two parts: "client" folder (ReactJS) and "backend" folder (ExpressJS). Below is the solving path that was taken, along with the timing (basically follows the commits history).
+
 
 1. [11:24] Want to try creating the app within the Reac framework.<br>
    Searching the web<br>
