@@ -36,6 +36,32 @@
   color: red;
 }
 
+ul.suggestions {
+  list-style-type: none;
+  border: 1px solid #EEEEEE;
+}
+
+ul.suggestions li {
+  padding: 1px;
+  margin: 1px;
+  border-bottom: 1px solid #EEEEEE;
+  cursor: pointer;
+}
+
+ul.suggestions li:last-child {
+  border:none;
+}
+
+.clearButton {
+  margin-left: 0.2em;
+  background-color: white;
+  cursor: pointer;
+}
+
+.progressIndicatorSpace {
+  min-height: 2em;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

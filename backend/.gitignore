@@ -26,4 +26,4 @@ yarn-error.log*
 .vscode
 
 # Sample file
-priv/asset/wordlist.txt
+# priv/asset/wordlist.txt

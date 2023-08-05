@@ -18,11 +18,32 @@ app.listen(PORT, () => {
 app.get("/apiWords", async (request, response) => {
   const input = request.query.input;
 
-  let res = null;
-  if (input && input.length >= 2) {
-    res = await readSuggestionsFromFile(input);
-  } else {
-    res = [];
+  let res = {
+    suggestions: [],
+    isOk: true,
+    errorMessage: null,
+  };
+
+  if (!input) {
+    res.isOk = false;
+    res.errorMessage = "Problem: no input was provided";
+    response.send(res);
+    return;
+  }
+
+  if (input.length < 2) {
+    res.isOk = false;
+    res.errorMessage = "Problem: input size is too small, input.length: " + input.length;
+    response.send(res);
+    return;
+  }
+
+  try {
+    res.suggestions = await readSuggestionsFromFile(input);
+  } catch (ex) {
+    res.isOk = false;
+    res.errorMessage = ex;
+    console.log('app.get("/apiWords", error: ' + ex);
   }
 
   response.send(res);

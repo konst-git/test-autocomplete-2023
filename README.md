@@ -107,10 +107,15 @@ $ npm install express
 
 20. [15:03] Implemented clicking on one of the suggestion, and populating the input via useRef()
 
+21. [aug 05, 13:12] Error handling for fetching operation. And add the file 'wordlist.txt' into the repo.
+
 ==== To-Do:
-  1. Optimize large file reading. Possibly index line numbers for certain starting characters, like:<br>
+1. Optimize large file reading. Possibly index line numbers for certain starting characters, like:<br>
   lines 0    - 1050: starting with 'a'<br>
   lines 1051 - 3000: starting with 'b'<br>
   lines 3001 - 5000: starting with 'c',<br>
   etc<br>
   , so when the new user request input comes in, can use their input to find the related chunk in the file.
+
+2. What if too many suggestions are returned from the api? Limit the number or provide a pagination?
+

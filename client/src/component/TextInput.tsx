@@ -1,55 +1,45 @@
 import React, { useEffect, useState, useRef, MutableRefObject } from "react"
+import Suggestions from '../entity/Suggestions';
 import SuggestionsDisplay from './SuggestionsDisplay';
+import fetchSuggestions from './fetchSuggestions';
 
 type Prop = {
-  value: string
+  value: string,
+  setHintNoLongerNeeded: () => void,
 };
 
-const TextInput = (props: Prop) => {
+const TextInput = ({ setHintNoLongerNeeded }: Prop) => {
   const [inputVal, setInputVal] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState<Suggestions>([]);
   const [fetchingError, setFetchingError] = useState("");
-  const [fetchAbortController, setFetchAbortController] = useState(new AbortController());
+  const [fetchAbortController, setFetchAbortController] = useState<AbortController | null>(null);
 
   const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputVal(event.target.value);
+
+    setHintNoLongerNeeded();
+
+    if (event.target.value === "") {
+      setFetchingError("");
+    }
   };
 
   useEffect(() => {
     if (inputVal.length >= 2) {
-      fetchSuggestions(inputVal)
+      fetchSuggestions(
+        fetchAbortController,
+        setFetchingError,
+        setFetchAbortController,
+        setSuggestions,
+        inputVal
+      );
+    } else {
+      setSuggestions([]);
     }
   }, [ inputVal ]);
-  
-  const fetchSuggestions = (inputVal: string) => {
-    fetchAbortController.abort();
-    const newAbortController = new AbortController();
 
-    setFetchAbortController(newAbortController);
-
-    const { signal } = newAbortController;
-
-    const apiUri = "/apiWords?input=" + encodeURI(inputVal);
-    fetch("//localhost:4000" + apiUri,
-      { signal }
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        setSuggestions(data);
-      },
-      err => {
-        setFetchingError(err);
-        console.log('[fetchSuggestions] error:', err);
-    })
-  };
-
-  /*
-    value={props.value}
-  */
   return (
     <div>
       <input
@@ -58,10 +48,13 @@ const TextInput = (props: Prop) => {
         placeholder="Start typing..."
         onChange={event => onChange(event)}
       />
-      
-      <SuggestionsDisplay items={suggestions} inputRef={inputRef} />
 
-      {fetchingError && (<div className="errorStyle">fetchingError</div>)}
+      <button className="clearButton" onClick={() => inputRef.current.value=""}>x</button>
+      
+      <SuggestionsDisplay items={suggestions} inputRef={inputRef}
+        isFetchingInProgress={fetchAbortController != null} />
+
+      {fetchingError && (<div className="errorStyle">Fetching error: {JSON.stringify(fetchingError)}</div>)}
     </div>
   );
 };

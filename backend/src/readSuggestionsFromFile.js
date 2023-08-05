@@ -3,14 +3,29 @@ const readline = require('readline');
 
 async function readSuggestions(prefix) {
   const customPromise = new Promise((resolve, reject) => {
-    const fileStream = fs.createReadStream('./priv/asset/wordlist.txt');
+    const filePath = 'priv/asset/wordlist.txt';
 
+    const fileStream = fs.createReadStream('./' + filePath);
     const rl = readline.createInterface({
-      input: fileStream,
-      crlfDelay: Infinity
-    });
+        input: fileStream,
+        crlfDelay: Infinity
+      });
     
     const res = [];
+
+    rl.on('error', function(err) {
+      // Get error details
+      let outputErrorMsg = null;
+      if (err?.code == 'ENOENT') {
+        outputErrorMsg = 'Error: cannot locate file: ' + filePath;
+      } else {
+        outputErrorMsg = err.message;
+      }
+
+      console.log('[readSuggestions] [rl.on(error)] ' + outputErrorMsg);
+      
+      reject(outputErrorMsg);
+    });
     
     rl.on('line', (line) => {
       if (line.toLowerCase().startsWith(prefix.toLowerCase())) {
@@ -22,14 +37,9 @@ async function readSuggestions(prefix) {
       console.log('Finished reading the file.');
       resolve(res);
     });
-    
-    // Todo, handle file reading errors
-    // reject(new Error('File reading error'))
   });
 
   return customPromise;
-
-
 };
 
 module.exports = readSuggestions;
